@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Josh's Playlist</title>
+
+    <!-- Our CSS File along with Boostrap Styles, and FontAwesome Styles-->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- DO NOT CHANGE ANYTHING ABOVE THIS LINE-->
+
+    <!-- Javascript Framework (e.g., vue.js) (ADD HERE) -->
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+
+  <body>
+    <!-- container holding the vue app -->
+    <div id="vue_app" class="container">
+      <div class="header">
+        <div class="container">
+          <h1 id="app_title">{{ title }}</h1>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="container">
+          <div class="col-md-6" v-for="(song, index) in songs">
+            <div class="thumbnail">
+              <img
+                class="poster"
+                :src="songs[index].posters[song.posterindex]"
+                v-on:click="posterClick(index)"
+              />
+              <div class="imageInfo">
+                Poster {{ songs[index].posterindex +1 }} of
+                {{songs[index].posters.length}}
+              </div>
+
+              <p class="songName">
+                {{ songs[index].songName }} ({{ songs[index].country }})
+              </p>
+              <p class="artist">
+                {{ songs[index].artist }}
+              </p>
+
+              <p class="runtime">
+                Runtime: {{ songs[index].runtime }} minutes
+              </p>
+              <p class="released">
+                Released: {{ getMonthText(songs[index].released) }}
+              </p>
+              <p class="websites">
+                Websites: <a v-bind:href="songs[index].youtube">Youtube</a> |
+                <a v-bind:href="songs[index].spotify">Spotify</a>
+              </p>
+              <p>
+                Discover More Like This?
+              </p>
+
+              <p>
+                <input
+                  type="button"
+                  value="Yes"
+                  id="bt"
+                  onclick="toggle(this)"
+                />
+              </p>
+
+              <!--The DIV element to toggle visibility. Its "display" property is set as "none". -->
+              <div
+                style="border: solid 1px #ddd; padding: 10px; display: none;"
+                id="cont"
+              >
+                <div>
+                  <label>{{ songs[index].moreSongs }}</label>
+                </div>
+              </div>
+
+              <div class="social">
+                <p class="likes" v-on:click="songs[index].likes++">
+                  <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{
+                  songs[index].likes }}
+                </p>
+                <p class="dislikes" v-on:click="songs[index].dislikes++">
+                  <i class="fa fa-thumbs-down" aria-hidden="true"></i> {{
+                  songs[index].dislikes }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+          <a
+            id="github"
+            class="btn btn-lg btn-warning"
+            v-bind:href="github"
+            target="_blank"
+          >
+            <i class="fa fa-lg fa-github pull-left" aria-hidden="true"></i>{{
+            owner }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- This load the Vue.js code -->
+    <script type="text/javascript" src="site.js"></script>
+  </body>
+</html>

@@ -1,2 +1,2 @@
-# playlist
+# JC-Playlist
 Created with CodeSandbox
